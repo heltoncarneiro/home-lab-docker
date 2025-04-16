@@ -1,3 +1,4 @@
+
 # Home Lab Docker Setup
 
 Este repositório contém a configuração para um ambiente de **Home Lab** utilizando **Docker**. O objetivo é fornecer uma solução prática para rodar diversos serviços em containers Docker de maneira simples e organizada.
@@ -100,6 +101,24 @@ Se você quiser parar e remover os containers, execute:
 
 ```bash
 docker-compose down
+```
+
+## Diagrama de Arquitetura
+
+Aqui está o diagrama que mostra a arquitetura do seu **Home Lab Docker Setup**:
+
+```mermaid
+graph TD
+    A[Docker Host] --> B[Pi-hole]
+    A[Docker Host] --> C[Nextcloud]
+    A[Docker Host] --> D[Zabbix]
+    A[Docker Host] --> E[Vaultwarden]
+    A[Docker Host] --> F[Prometheus]
+    A[Docker Host] --> G[EmulatorJS]
+    A[Docker Host] --> H[Fileserver]
+    A[Docker Host] --> I[Grafana]
+    D --> I
+    F --> I
 ```
 
 ## Notas
