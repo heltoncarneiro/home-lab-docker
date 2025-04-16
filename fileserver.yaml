@@ -1,0 +1,13 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    ports:
+      - 8686:80
+    volumes:
+      - /home:/srv
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - PUID=1000  # ajuste se seu usuário tiver outro ID
+      - PGID=1000
+    restart: unless-stopped

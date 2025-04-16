@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.30.5-alpine
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      WEBSOCKET_ENABLED: "true"
+      SIGNUPS_ALLOWED: "true"  # <-- Permite o registro de novos usuários
+      WEB_VAULT_ENABLED: "true"
+      DOMAIN: "https://192.168.1.100:8282"
+    volumes:
+      - ./vw-data/:/data/
+    networks:
+      - vaultwarden_network
+
+  nginx:
+    image: nginx:latest
+    container_name: vaultwarden_nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/docker-certs:/etc/nginx/certs:ro
+    ports:
+      - "8282:8282"  # <-- HTTPS rodando na porta 8282
+    networks:
+      - vaultwarden_network
+
+networks:
+  vaultwarden_network:
